@@ -12,7 +12,7 @@
 "	001	04-Feb-2013	file creation
 
 function! ProportionalResize#RecordResize()
-    autocmd! ProportionalResize CursorHold,CursorHoldI * call ProportionalResize#AdaptWindowSizes() | autocmd! ProportionalResize CursorHold,CursorHoldI * call ProportionalResize#RecordDimensions()
+    autocmd! ProportionalResize CursorHold,CursorHoldI * call ProportionalResize#AdaptWindowSizes() | autocmd! ProportionalResize CursorHold,CursorHoldI * call ProportionalResizePlugin#RecordDimensions()
 endfunction
 function! s:Scale( command, scaleFactor, isVertical )
     let l:isVerticalCommand = (a:command =~# '^vert')
@@ -23,7 +23,7 @@ function! s:Scale( command, scaleFactor, isVertical )
     endif
 endfunction
 function! ProportionalResize#AdaptWindowSizes()
-    let l:currentSize = ProportionalResize#GetSize()
+    let l:currentSize = ProportionalResizePlugin#RecordResize()
     if l:currentSize == g:ProportionalResize_PreviousSize || winnr('$') == 1
 	" Nothing to do.
 	return
@@ -41,7 +41,7 @@ echomsg '****' string(g:ProportionalResize_PreviousWindowDimensions)
 
     if g:ProportionalResize_PreviousWindowDimensions[0] != winnr('$')
 	call ingo#msg#ErrorMsg('Stale window dimensions record; cannot correct window sizes')
-	call ProportionalResize#RecordDimensions()
+	call ProportionalResizePlugin#RecordDimensions()
 	return
     endif
 
@@ -55,7 +55,7 @@ echomsg '****' string(g:ProportionalResize_PreviousWindowDimensions)
     execute join(l:winrestCommands, '|')
 echomsg '####' join(l:winrestCommands, '|')
 
-    call ProportionalResize#RecordDimensions()
+    call ProportionalResizePlugin#RecordDimensions()
 endfunction
 
 " vim: set ts=8 sts=4 sw=4 noexpandtab ff=unix fdm=syntax :
