@@ -9,6 +9,15 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"	002	02-Mar-2013	FIX: In the command wrapper, must record the
+"				previous dimensions (before and after), not just
+"				get them. Otherwise, one may still get the
+"				"stale window dimensions" error, because the
+"				wrapped resizing command still triggers the
+"				VimResized event, and therefore our autocmds.
+"				With the dimensions properly recorded, that will
+"				then be a no-op because there's no change in
+"				dimensions.
 "	001	04-Feb-2013	file creation
 let s:save_cpo = &cpo
 set cpo&vim
@@ -56,10 +65,11 @@ echomsg '####' join(l:winrestCommands, '|')
 endfunction
 
 function! ProportionalResize#CommandWrapper( resizeCommand )
-    let l:previousDimensions = ProportionalResize#GetDimensions()
+    let l:previousDimensions = ProportionalResize#Record#RecordDimensions()
     try
 	execute a:resizeCommand
 	call ProportionalResize#AdaptWindowSizes(l:previousDimensions)
+	call ProportionalResize#Record#RecordDimensions()
     catch /^Vim\%((\a\+)\)\=:E/
 	call ingo#msg#VimExceptionMsg()
     endtry
