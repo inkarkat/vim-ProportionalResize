@@ -1,6 +1,7 @@
 " ProportionalResize.vim: Adapt the window proportions after Vim is resized.
 "
 " DEPENDENCIES:
+"   - ProportionalResize/Record.vim autoload script
 "   - ingo/msg.vim autoload script
 "
 " Copyright: (C) 2013 Ingo Karkat
@@ -50,8 +51,8 @@ function! ProportionalResize#AdaptWindowSizes( previousDimensions )
     let l:columnsScaleFactor = 1.0 * l:currentDimensions.columns / a:previousDimensions.columns
     let l:linesScaleFactor   = 1.0 * l:currentDimensions.lines / a:previousDimensions.lines
 
-echomsg '**** scaling' string(l:linesScaleFactor) 'vert' string(l:columnsScaleFactor)
-echomsg '****' string(a:previousDimensions)
+"****D echomsg '**** scaling' string(l:linesScaleFactor) 'vert' string(l:columnsScaleFactor)
+"****D echomsg '****' string(a:previousDimensions)
 
     let l:winrestCommands = split(a:previousDimensions.winrestCommands, '|')
     if l:currentDimensions.columns != a:previousDimensions.columns
@@ -61,7 +62,7 @@ echomsg '****' string(a:previousDimensions)
 	call map(l:winrestCommands, 's:Scale(v:val, l:linesScaleFactor, 0)')
     endif
     execute join(l:winrestCommands, '|')
-echomsg '####' join(l:winrestCommands, '|')
+"****D echomsg '####' join(l:winrestCommands, '|')
 endfunction
 
 function! ProportionalResize#CommandWrapper( resizeCommand )
