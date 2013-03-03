@@ -65,6 +65,8 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES				     *ProportionalResize-dependencies*
 
 - Requires Vim 7.3 or higher and the +float feature.
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.000 or
+  higher.
 
 ==============================================================================
 CONFIGURATION				    *ProportionalResize-configuration*
