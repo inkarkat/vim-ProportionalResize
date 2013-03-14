@@ -34,12 +34,6 @@ SOURCE									     *
 Inspired by the following Stack Overflow question:
     http://stackoverflow.com/questions/14649698/how-to-resize-split-windows-in-vim-proportionally
 
-SEE ALSO								     *
-(Plugins offering complementary functionality, or plugins using this library.)
-
-RELATED WORKS								     *
-(Alternatives from other authors, other approaches, references not used here.)
-
 ==============================================================================
 USAGE						    *ProportionalResize-usage*
 							 *:ProportionalResize*
@@ -93,6 +87,10 @@ delay, modify: >
 ==============================================================================
 INTEGRATION				      *ProportionalResize-integration*
 
+If you have any plugins or mappings that alter the size of the Vim window
+(e.g. a |:Fullscreen| or |:Maximize| command) it's advisable to trigger it
+through the |:ProportionalResize| wrapper.
+
 ==============================================================================
 LIMITATIONS				      *ProportionalResize-limitations*
 
@@ -109,7 +107,7 @@ IDEAS						    *ProportionalResize-ideas*
 ==============================================================================
 HISTORY						  *ProportionalResize-history*
 
-GOAL
+1.00	04-Mar-2013
 First published version.
 
 0.01	04-Feb-2013
