@@ -10,6 +10,11 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.00.003	04-Mar-2013	A switch of tab pages can also trigger the
+"				VimResized event, e.g. when running maximized /
+"				fullscreen and one tab has scrollbars on both
+"				sides due to a vertical split, but the other
+"				hasn't. Don't attempt any adaptations then.
 "	002	02-Mar-2013	FIX: In the command wrapper, must record the
 "				previous dimensions (before and after), not just
 "				get them. Otherwise, one may still get the
@@ -27,6 +32,7 @@ function! ProportionalResize#GetDimensions()
     return {
     \   'columns': &columns,
     \   'lines': &lines,
+    \   'tabnr': tabpagenr(),
     \   'winNum': winnr('$'),
     \   'winrestCommands': winrestcmd()
     \}
@@ -45,6 +51,12 @@ function! ProportionalResize#AdaptWindowSizes( previousDimensions )
     if l:currentDimensions.columns == a:previousDimensions.columns && l:currentDimensions.lines == a:previousDimensions.lines
     \   || winnr('$') == 1
 	" Nothing to do.
+	return
+    endif
+    if l:currentDimensions.tabnr != a:previousDimensions.tabnr
+	" A switch of tab pages can also trigger the VimResized event, e.g. when
+	" running maximized / fullscreen and one tab has scrollbars on both
+	" sides due to a vertical split, but the other hasn't.
 	return
     endif
 
