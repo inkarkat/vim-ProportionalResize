@@ -11,7 +11,7 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
-"	001	04-Feb-2013	file creation
+"   1.00.001	04-Feb-2013	file creation
 
 " Avoid installing twice or when in unsupported Vim version.
 if exists('g:loaded_ProportionalResize') || (v:version < 703) || ! has('float')
