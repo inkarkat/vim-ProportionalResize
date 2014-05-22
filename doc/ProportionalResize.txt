@@ -117,6 +117,9 @@ HISTORY						  *ProportionalResize-history*
 
 1.01	RELEASEME
 - Add :NoProportionalResize command.
+- BUG: Always restore the original 'updatetime' option value after the resize.
+  Otherwise, the lower value may persist, e.g. when the "Stale window
+  dimensions record" error is given.
 
 1.00	04-Mar-2013
 First published version.
