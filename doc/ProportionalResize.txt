@@ -115,7 +115,7 @@ IDEAS						    *ProportionalResize-ideas*
 ==============================================================================
 HISTORY						  *ProportionalResize-history*
 
-1.01	RELEASEME
+1.01	23-May-2014
 - Add :NoProportionalResize command.
 - BUG: Always restore the original 'updatetime' option value after the resize.
   Otherwise, the lower value may persist, e.g. when the "Stale window
