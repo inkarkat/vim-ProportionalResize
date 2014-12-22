@@ -115,6 +115,12 @@ IDEAS						    *ProportionalResize-ideas*
 ==============================================================================
 HISTORY						  *ProportionalResize-history*
 
+1.02	RELEASEME
+- Triggering a CursorHold event after resizing could abort the querying for
+  the password of an encrypted file (e.g. via :tabedit encrypted.txt). Instead
+  of feedkey()'ing apparently not so neutral :<Esc> keys, temporarily install
+  additional frequent autocmds on CursorMoved[I], (Buf|Win)Leave.
+
 1.01	23-May-2014
 - Add :NoProportionalResize command.
 - BUG: Always restore the original 'updatetime' option value after the resize.
