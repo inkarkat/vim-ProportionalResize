@@ -115,7 +115,7 @@ IDEAS						    *ProportionalResize-ideas*
 ==============================================================================
 HISTORY						  *ProportionalResize-history*
 
-1.02	RELEASEME
+1.02	23-Dec-2014
 - Triggering a CursorHold event after resizing could abort the querying for
   the password of an encrypted file (e.g. via :tabedit encrypted.txt). Instead
   of feedkey()'ing apparently not so neutral :<Esc> keys, temporarily install
