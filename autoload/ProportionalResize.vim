@@ -88,7 +88,7 @@ function! ProportionalResize#CommandWrapper( isAdapt, resizeCommand )
 	    call ProportionalResize#AdaptWindowSizes(l:previousDimensions)
 	endif
 	call ProportionalResize#Record#RecordDimensions()
-    catch /^Vim\%((\a\+)\)\=:E/
+    catch /^Vim\%((\a\+)\)\=:/
 	call ingo#msg#VimExceptionMsg()
     endtry
 endfunction
