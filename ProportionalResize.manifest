@@ -1,0 +1,4 @@
+autoload/ProportionalResize.vim
+autoload/ProportionalResize/Record.vim
+plugin/ProportionalResize.vim
+doc/ProportionalResize.txt
