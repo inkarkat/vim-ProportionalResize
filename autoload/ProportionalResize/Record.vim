@@ -9,6 +9,13 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.02.005	15-Dec-2014	Triggering a CursorHold event after resizing
+"				could abort the querying for the password of an
+"				encrypted file (e.g. via :tabedit
+"				encrypted.txt). Instead of feedkey()'ing
+"				apparently not so neutral :<Esc> keys,
+"				temporarily install additional frequent autocmds
+"				on CursorMoved[I], (Buf|Win)Leave.
 "   1.01.004	16-May-2014	BUG: Always restore the original 'updatetime'
 "				option value after the resize. Otherwise, the
 "				lower value may persist, e.g. when the "Stale
@@ -29,10 +36,6 @@ set cpo&vim
 function! ProportionalResize#Record#RecordDimensions()
     let s:dimensions = ProportionalResize#GetDimensions()
     return s:dimensions
-endfunction
-
-function! s:TriggerCursorHold()
-    call feedkeys(":\<Esc>", 'n')
 endfunction
 
 function! s:AfterResize()
@@ -63,12 +66,12 @@ function! s:RecordResize()
 	let &updatetime = g:ProportionalResize_UpdateTime
     endif
 
-    " Force another CursorHold update so that we definitely get a call back
-    " after the resize. (It seems that during resizing, no CursorHold events are
-    " fired.)
-    call s:TriggerCursorHold()
-
-    autocmd! ProportionalResize CursorHold,CursorHoldI * call <SID>AfterResize() |
+    " It seems that during resizing, no CursorHold events are fired. As
+    " triggering a CursorHold update can badly affect Vim (we might be in the
+    " middle of a query of an encryption password, for example), temporarily
+    " install additional frequent autocmds instead.
+    autocmd! ProportionalResize CursorHold,CursorHoldI,CursorMoved,CursorMovedI,BufLeave,WinLeave * call <SID>AfterResize() |
+    \   execute 'autocmd! ProportionalResize CursorHold,CursorHoldI,CursorMoved,CursorMovedI,BufLeave,WinLeave *' |
     \   execute 'autocmd! ProportionalResize' g:ProportionalResize_RecordEvents '* call ProportionalResize#Record#RecordDimensions()'
 endfunction
 
