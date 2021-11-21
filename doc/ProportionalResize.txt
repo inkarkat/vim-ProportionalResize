@@ -31,7 +31,7 @@ resizings through the mouse or window manager.
 
 SOURCE									     *
 
-Inspired by the following Stack Overflow question:
+Inspired by
     http://stackoverflow.com/questions/14649698/how-to-resize-split-windows-in-vim-proportionally
 
 ==============================================================================
@@ -134,7 +134,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2013-2014 Ingo Karkat
+Copyright: (C) 2013-2019 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
